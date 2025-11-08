@@ -1,0 +1,135 @@
+RUN_STARTED
+{
+  "type": "RUN_STARTED",
+  "thread_id": "thread-1762597250073",
+  "run_id": "run-1762597250073"
+}
+TEXT_MESSAGE_CONTENT
+{
+  "type": "TEXT_MESSAGE_CONTENT",
+  "content": "Generating tool plan..."
+}
+STATE_SNAPSHOT
+{
+  "type": "STATE_SNAPSHOT",
+  "snapshot": {
+    "plan": [
+      {
+        "tool": "run_aggregated_query",
+        "arguments": {
+          "query_type": "count",
+          "field": "flightLegState.flightNumber",
+          "start_date": "2024-06-01",
+          "end_date": "2024-06-30",
+          "filter_json": "{ 'flightLegState.startStation': 'SXR', 'flightLegState.endStation': 'BOM' }"
+        }
+      }
+    ]
+  }
+}
+TOOL_CALL_START
+{
+  "type": "TOOL_CALL_START",
+  "toolCallId": "toolcall-456f1b49",
+  "toolCallName": "run_aggregated_query",
+  "parentMessageId": null
+}
+TOOL_CALL_ARGS
+{
+  "type": "TOOL_CALL_ARGS",
+  "toolCallId": "toolcall-456f1b49",
+  "delta": "{\"query_type\": \"count\", \"field\": \"flightLegState.flightNumber\", \"start_date\": \"2024-06-01\", \"end_date\": \"2024-06-30\", \"filter_json\": \"{ 'flightLegState.startStation': 'SXR', 'flightLegState.endStation': 'BOM' }\"}"
+}
+TOOL_CALL_END
+{
+  "type": "TOOL_CALL_END",
+  "toolCallId": "toolcall-456f1b49"
+}
+TOOL_CALL_RESULT
+{
+  "type": "TOOL_CALL_RESULT",
+  "message": {
+    "id": "msg-d93ff363",
+    "role": "tool",
+    "content": "{\"ok\": true, \"data\": {\"pipeline\": [{\"$match\": {\"flightLegState.startStation\": \"SXR\", \"flightLegState.endStation\": \"BOM\", \"flightLegState.dateOfOrigin\": {\"$gte\": \"2024-06-01\", \"$lte\": \"2024-06-30\"}}}, {\"$group\": {\"_id\": null, \"value\": {\"$sum\": 1}}}], \"results\": [{\"_id\": null, \"value\": 8}]}}",
+    "tool_call_id": "toolcall-456f1b49"
+  }
+}
+STEP_FINISHED
+{
+  "type": "STEP_FINISHED",
+  "step_index": 0,
+  "tool": "run_aggregated_query"
+}
+TEXT_MESSAGE_CONTENT
+{
+  "type": "TEXT_MESSAGE_CONTENT",
+  "content": "Summarizing results..."
+}
+TEXT_MESSAGE_CONTENT
+{
+  "type": "TEXT_MESSAGE_CONTENT",
+  "message": {
+    "id": "msg-723cb1b8",
+    "role": "assistant",
+    "content": "- Total number of flights from SXR (Srinagar) to BOM (Mumbai) in June 2024: **8 flights**."
+  }
+}
+STATE_SNAPSHOT
+{
+  "type": "STATE_SNAPSHOT",
+  "snapshot": {
+    "plan": [
+      {
+        "tool": "run_aggregated_query",
+        "arguments": {
+          "query_type": "count",
+          "field": "flightLegState.flightNumber",
+          "start_date": "2024-06-01",
+          "end_date": "2024-06-30",
+          "filter_json": "{ 'flightLegState.startStation': 'SXR', 'flightLegState.endStation': 'BOM' }"
+        }
+      }
+    ],
+    "results": [
+      {
+        "run_aggregated_query": {
+          "ok": true,
+          "data": {
+            "pipeline": [
+              {
+                "$match": {
+                  "flightLegState.startStation": "SXR",
+                  "flightLegState.endStation": "BOM",
+                  "flightLegState.dateOfOrigin": {
+                    "$gte": "2024-06-01",
+                    "$lte": "2024-06-30"
+                  }
+                }
+              },
+              {
+                "$group": {
+                  "_id": null,
+                  "value": {
+                    "$sum": 1
+                  }
+                }
+              }
+            ],
+            "results": [
+              {
+                "_id": null,
+                "value": 8
+              }
+            ]
+          }
+        }
+      }
+    ]
+  }
+}
+RUN_FINISHED
+{
+  "type": "RUN_FINISHED",
+  "run_id": "run-1762597250073"
+}   . currently we are getting this answer from query. First can you explain this format ? event stream and all and what all this means ?    
